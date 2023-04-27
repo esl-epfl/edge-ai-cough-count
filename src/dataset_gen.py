@@ -114,14 +114,14 @@ def get_non_cough_windows(data_folder,subj_id, trial,mov,noise,sound,n_samp, win
 def get_samples_for_subject(data_folder, subj_id, window_len, aug_factor):
     """
     For each subject, extract windows of all of the cough sounds for each movement (sit, walk) and noise condition (none, music, traffic, cough).
-    Extract an equal number of non-cough windows for each non-cough sound (speak, laugh, throat, breathe) for the corresponding conditons.
+    Extract an equal number of non-cough windows for each non-cough sound (laugh, throat, breathe) for the corresponding conditons.
     Inputs: 
     - subj_id: ID number of the subject to process
     - window_len: desired data window length (in seconds)
     - aug_factor: augmentation factor; how many times to randomly shift the signal within the window
     Outputs:
     - audio_data: NxMx2 data matrix where 
-        - N = (number of coughs x augmentation factor x 5)
+        - N = (number of coughs x augmentation factor x 4)
         - M = int(window_len * 16000)
         - first index = outer microphone, second index = body-facing microphone
     - imu_data: NxLx6 data matrix where
