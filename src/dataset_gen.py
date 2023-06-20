@@ -148,7 +148,7 @@ def get_samples_for_subject(data_folder, subj_id, window_len, aug_factor):
                 # Extract cough windows
                 sound = Sound.COUGH
                 path = data_folder + subj_id + '/trial_' + trial + '/mov_' + mov + '/background_noise_' + noise + '/' + sound
-                if (len(os.listdir(path)) > 0) & os.path.isfile(path + '/ground_truth.json'):
+                if os.path.isdir(path) & os.path.isfile(path + '/ground_truth.json'):
                     fn = path + '/ground_truth.json'
                     audio, imu, num_coughs = get_cough_windows(data_folder,fn, window_len, aug_factor)
                     gt = np.ones(audio.shape[0])
