@@ -114,7 +114,7 @@ def load_annotation(folder, subject_id, trial, mov, noise, sound):
             - noise: Noise Enum, audio noise condition of the recording
             - sound: Sound Enum, which noise was being performed (ex. cough, laugh, etc.)
             - normalize_1: Whether to normalize recording s.t. it has a mean of zero and maximum absolute value of 1
-        Outputs:
+        Outputs: 
             - start times: times of starts of each cough (in seconds) from the beginning of the recording
             - end times: times of ends of each cough (in seconds) from the beginning of the recording
     """
