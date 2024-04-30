@@ -33,6 +33,7 @@ In `Segmentation_Augmentation.ipynb`, we demonstrate how to turn the raw biosign
 In `Cough_Annotation.ipynb`, we explain how the fine-grained cough labeling was performed in a semi-automatic manner, in case other teams wish to merge their datasets and keep the labeling scheme consistent.
 
 ### Testing your predictions
+Once you use our datset to develop a ML model for counting coughs, the next step is to validate your predicted cough locations against the ground-truth cough locations.
 
 The `Compute_Success_Metrics.ipynb` notebook demonstrates how to use [the timescoring event-based success evaluation library](https://pypi.org/project/timescoring/) to extract clinically meaningful success metrics from your algorithms.
 
