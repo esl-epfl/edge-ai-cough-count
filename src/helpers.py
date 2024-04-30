@@ -9,7 +9,7 @@ from scipy.signal import butter, filtfilt, find_peaks
 import pandas as pd
 import numpy as np
 import json
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 ##### Sampling frequencies of the sensors #####
 FS_AUDIO = 16000
