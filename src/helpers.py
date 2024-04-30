@@ -8,6 +8,7 @@ from scipy.io import wavfile
 from scipy.signal import butter, filtfilt, find_peaks
 import pandas as pd
 import numpy as np
+import json
 
 ##### Sampling frequencies of the sensors #####
 FS_AUDIO = 16000
@@ -101,6 +102,35 @@ def load_audio(folder, subject_id, trial, mov, noise, sound, normalize_1=False):
         audio_skin = audio_skin/max_val
     
     return audio_air, audio_skin
+
+def load_annotation(folder, subject_id, trial, mov, noise, sound):
+    """
+    Load the annotations (i.e. ground-truth cough locations of a given recording) for a cough recording
+        Inputs:
+            - folder: string, folder where the database is stored
+            - subject_id: string, numerical ID of the subject 
+            - trial: Trial Enum, which trial the recording was part of
+            - mov: Movement Enum, specifies kinematic noise condition of the recording
+            - noise: Noise Enum, audio noise condition of the recording
+            - sound: Sound Enum, which noise was being performed (ex. cough, laugh, etc.)
+            - normalize_1: Whether to normalize recording s.t. it has a mean of zero and maximum absolute value of 1
+        Outputs:
+            - start times: times of starts of each cough (in seconds) from the beginning of the recording
+            - end times: times of ends of each cough (in seconds) from the beginning of the recording
+    """
+    
+    if sound != Sound.COUGH:
+        raise Exception("Only cough recordings have annotations")
+
+    path = folder + subject_id + '/trial_' + trial + '/mov_' + mov + '/background_noise_' + noise + '/' + sound + '/'
+    if (len(os.listdir(path)) > 0) & os.path.isfile(path + '/ground_truth.json'):
+        fn = path + '/ground_truth.json'
+        with open(fn, 'rb') as f:
+            loaded_dict = json.load(f)
+            return loaded_dict["start_times"],loaded_dict["end_times"]
+    else:
+        raise Exception("File does not exist")
+
 
 def get_audio_time(audio_sig):
     """Return the time of a given audio recording"""
